@@ -82,8 +82,21 @@ public class RSA {
     return message.modPow(e, n);
   }
 
-  private BigInteger deszifratu( BigInteger ciphertext) {
-    return ciphertext.modPow(d, n);
+  private String deszifratu( BigInteger ciphertext) {
+    String emaitza="";
+    String dezifratuta= ciphertext.modPow(d, n).toString();
+    String lehenZen="";
+    String letra="";
+    for(int i=0; i<dezifratuta.length(); i++) {
+      if(i%2==0){
+        lehenZen=Character.toString(dezifratuta.charAt(i));
+      }else{
+        letra=lehenZen+Character.toString(dezifratuta.charAt(i));
+        Integer ascii=Integer.parseInt(letra);
+        emaitza+=Character.toString((int)ascii);
+      }
+    }
+    return emaitza;
   }
 
 }
